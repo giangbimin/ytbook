@@ -33,9 +33,6 @@ services:
       - DB_USERNAME=postgres
       - DB_PASSWORD=password
       - SECRET_KEY_BASE=production
-networks:
-  ytbook_default:
-    external: true
 volumes:
   redis:
   postgres:

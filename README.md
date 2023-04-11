@@ -35,4 +35,3 @@
 ```
   rails g rspec:install
 ```
-
