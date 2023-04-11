@@ -14,3 +14,15 @@
   fly launch
   fly deploy
 ```
+
+## Test
+
+```
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
+```
+
+```
+  rails g rspec:install
+```
