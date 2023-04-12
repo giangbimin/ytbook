@@ -1,15 +1,20 @@
-default: &default
+development:
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV.fetch("DB_HOST") %>
-  username: <%= ENV.fetch("DB_USERNAME") %>
-  password: <%= ENV.fetch("DB_PASSWORD") %>
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   pool: 5
-
-development:
-  <<: *default
   database: ytbook_development
 
 test:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  pool: 5
   database: ytbook_test
+
+production:
+  url: <%= ENV['DATABASE_URL'] %>

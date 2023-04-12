@@ -3,7 +3,7 @@ require 'net/http'
 require 'json'
 
 class YoutubeService
-  YOUTUBE_API_KEY = "AIzaSyC21gBTvwwHYjzE1OUKd3TR9raGKUL1mY0"
+  YOUTUBE_API_KEY = ""
 
   def initialize(url)
     @url = url
@@ -33,7 +33,7 @@ r    raise ArgumentError.new('Invalid YouTube URL') unless valid_url?
 
   def video_info
     @video_info ||= begin
-      url = "https://www.googleapis.com/youtube/v3/videos?id=#{video_id}&key=#{YOUTUBE_API_KEY}&part=snippet"
+      url = "https://www.googleapis.com/youtube/v3/videos?id=#{video_id}&key=#{ENV['YOUTUBE_API_KEY']}&part=snippet"
       response = Net::HTTP.get(URI(url))
       JSON.parse(response)['items'][0]['snippet']
     end
