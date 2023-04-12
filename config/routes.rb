@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
   root "video_sources#index"
-  resources :video_sources, only: %i[index new create]
+  get "/share", to: "video_sources#new"
+  resources :video_sources, only: %i[index create]
 end
