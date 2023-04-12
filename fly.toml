@@ -7,9 +7,13 @@ mounts = []
 primary_region = "sin"
 processes = []
 
+[processes]
+web = "bin/rails server"
+worker = "bundle exec sidekiq"
+
 [[services]]
   internal_port = 3000
-  processes = ["app"]
+  processes = ["web"]
   protocol = "tcp"
   [services.concurrency]
     hard_limit = 25

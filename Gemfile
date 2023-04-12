@@ -13,16 +13,19 @@ gem "tailwindcss-rails"
 gem "jbuilder"
 gem "redis", "~> 4.0"
 # gem "kredis"
-# gem "bcrypt", "~> 3.1.7"
+gem 'sidekiq', '~> 7.0', '>= 7.0.8'
+gem "bcrypt", "~> 3.1.7"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 # gem "sassc-rails"
 # gem "image_processing", "~> 1.2"
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'dotenv-rails'
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
+  gem 'shoulda-matchers', '~> 5.0'
 end
 group :development do
   gem "web-console"

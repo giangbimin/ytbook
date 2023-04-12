@@ -66,11 +66,13 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.0)
     crass (1.0.6)
     date (3.3.3)
     debug (1.7.2)
@@ -79,6 +81,10 @@ GEM
     diff-lcs (1.5.0)
     dockerfile-rails (1.2.5)
       rails
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -162,6 +168,8 @@ GEM
       zeitwerk (~> 2.5)
     rake (13.0.6)
     redis (4.8.1)
+    redis-client (0.14.1)
+      connection_pool
     reline (0.3.3)
       io-console (~> 0.5)
     rspec-core (3.12.1)
@@ -181,6 +189,13 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.12.0)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
+    sidekiq (7.0.8)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.11.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -217,9 +232,11 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   debug
   dockerfile-rails (>= 1.2)
+  dotenv-rails
   factory_bot_rails
   faker
   importmap-rails
@@ -229,6 +246,8 @@ DEPENDENCIES
   rails (~> 7.0.4)
   redis (~> 4.0)
   rspec-rails
+  shoulda-matchers (~> 5.0)
+  sidekiq (~> 7.0, >= 7.0.8)
   sprockets-rails
   stimulus-rails
   tailwindcss-rails
