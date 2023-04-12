@@ -12,10 +12,8 @@ class VideoSourcesController < ApplicationController
     respond_to do |format|
       if @video_source.save
         format.html { redirect_to video_sources_url, notice: "Video source was successfully created." }
-        format.json { render json: {status: :created} }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @video_source.errors, status: :unprocessable_entity }
       end
     end
   end

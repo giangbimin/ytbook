@@ -4,7 +4,7 @@ class VideoSource < ApplicationRecord
   validates :provider, presence: true
   validates :identify_id, presence: true
   attr_accessor :video_url
-  validates :video_url, presence: true, format: { with: /\A(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+\z/, message: 'invalid format' }, on: :create
+  validates :video_url, presence: true, on: :create
   before_validation :parse_url, on: :create
 
   private
@@ -15,6 +15,11 @@ class VideoSource < ApplicationRecord
     return errors.add(:video_url, 'invalid format') unless uri.kind_of?(URI::HTTP) || uri.kind_of?(URI::HTTPS)
     self.provider = PROVIDER_DOMAINS[uri.host]
     errors.add(:provider, 'unsupported provider') if self.provider.blank?
-    self.identify_id = Rack::Utils.parse_query(uri.query)['v'] || uri.path.split('/').reject(&:blank?).last
+    self.identify_id = identify_id_by_uri(uri)
+  end
+
+  def identify_id_by_uri uri
+    return unless self.youtube?
+    Rack::Utils.parse_query(uri.query)['v'] || uri.path.split('/').reject(&:blank?).last 
   end
 end

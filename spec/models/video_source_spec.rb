@@ -7,7 +7,6 @@ RSpec.describe VideoSource, type: :model do
     it { should validate_presence_of(:identify_id) }
     it { should allow_value("https://www.youtube.com/watch?v=abc123").for(:video_url) }
     it { should allow_value("https://youtu.be/abc123").for(:video_url) }
-    it { should_not allow_value("https://example.com/abc123").for(:video_url).with_message('invalid format') }
     it { should_not allow_value("").for(:video_url).with_message('blank') }
   end
 
