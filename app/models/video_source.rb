@@ -4,12 +4,12 @@ class VideoSource < ApplicationRecord
   validates :provider, presence: true
   validates :identify_id, presence: true
   attr_accessor :video_url
-  validates :video_url, presence: true, on: :create
   before_validation :parse_url, on: :create
 
   private
 
   def parse_url
+    return if provider.present? && identify_id.present?
     return errors.add(:video_url, 'blank') if video_url.blank?
     uri = URI.parse(video_url)
     return errors.add(:video_url, 'invalid format') unless uri.kind_of?(URI::HTTP) || uri.kind_of?(URI::HTTPS)

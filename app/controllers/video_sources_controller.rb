@@ -9,9 +9,10 @@ class VideoSourcesController < ApplicationController
 
   def create
     @video_source = VideoSource.new(video_source_params)
+    status = GenerateVideoService.new(@video_source).execute
     respond_to do |format|
-      if @video_source.save
-        format.html { redirect_to video_sources_url, notice: "Video source was successfully created." }
+      if status
+        format.html { redirect_to videos_url, notice: "Video was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end

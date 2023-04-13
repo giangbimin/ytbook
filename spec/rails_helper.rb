@@ -40,6 +40,7 @@ Shoulda::Matchers.configure do |config|
     with.library :active_model
   end
 end
+WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

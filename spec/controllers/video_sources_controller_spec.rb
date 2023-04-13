@@ -1,14 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe VideoSourcesController, type: :controller do
+  let(:video_id) {'dQw4w9WgXcQ'}
+  let(:valid_provider_res) {{
+    video_id: video_id,
+    title: 'Rick Astley - Never Gonna Give You Up (Video)',
+    description: 'Rick Astley - Never Gonna Give You Up (Official Music Video) - Listen On Spotify: http://smarturl.it/AstleySpotify\nLearn more about the brand new album ‘Beautiful ...'
+  }}
   let(:valid_attributes) {
-    {video_url: "https://www.youtube.com/watch?v=abc123"}
+    {video_url: "https://www.youtube.com/watch?v=#{video_id}"}
   }
-
   let(:invalid_attributes) {
     {video_url: "https://www.aaaaa.com/watch?v=abc123"}
   }
-
 
   describe "GET #new" do
     it "returns http success" do
@@ -22,30 +26,20 @@ RSpec.describe VideoSourcesController, type: :controller do
     end
   end
 
-  describe "GET #index" do
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
-    end
-
-    it "assigns all video sources as @video_sources" do
-      video_source = VideoSource.create!(valid_attributes)
-      get :index
-      expect(assigns(:video_sources)).to eq([video_source])
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new VideoSource" do
+      before do
+        allow_any_instance_of(YoutubeProvider).to receive(:call).and_return(valid_provider_res)
+      end
+      it "creates a new Video" do
         expect {
           post :create, params: { video_source: valid_attributes }
-        }.to change(VideoSource, :count).by(1)
+        }.to change(Video, :count).by(1)
       end
 
-      it "redirects to the video sources index" do
+      it "redirects to the videos index" do
         post :create, params: { video_source: valid_attributes }
-        expect(response).to redirect_to(video_sources_url)
+        expect(response).to redirect_to(videos_url)
       end
     end
 

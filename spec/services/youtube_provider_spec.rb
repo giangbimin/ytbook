@@ -11,6 +11,32 @@ RSpec.describe YoutubeProvider, type: :service do
       allow(ENV).to receive(:[]).with('YOUTUBE_API_KEY').and_return(youtube_api_key)
     end
 
+    context 'with a blank video ID' do
+      let(:response_body) do
+        {
+          items: [
+            {
+              snippet: {
+                title: video_title,
+                description: video_description
+              }
+            }
+          ]
+        }.to_json
+      end
+
+      before do
+        stub_request(:get, "https://www.googleapis.com/youtube/v3/videos?id=#{video_id}&key=#{youtube_api_key}&part=snippet").
+          to_return(status: 200, body: response_body, headers: {})
+      end
+
+      it 'returns a hash with the error' do
+        result = described_class.new(nil).call
+        expect(result).to eq({error: 'Please input video ID'})
+      end
+    end
+
+
     context 'with a valid video ID' do
       let(:response_body) do
         {
@@ -54,8 +80,9 @@ RSpec.describe YoutubeProvider, type: :service do
           to_return(status: 404, body: response_body, headers: {})
       end
 
-      it 'raises an ArgumentError' do
-        expect { described_class.new(video_id).call }.to raise_error(ArgumentError, 'Invalid video ID ')
+      it 'returns a hash with the error' do
+        result = described_class.new(video_id).call
+        expect(result).to eq({ error:'Video not found'})
       end
     end
   end

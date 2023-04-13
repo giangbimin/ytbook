@@ -2,16 +2,15 @@ require 'uri'
 require 'net/http'
 require 'json'
 
-
 class YoutubeProvider
   def initialize(video_id)
     @video_id = video_id
   end
 
   def call
-    raise ArgumentError.new('Invalid video ID ') if @video_id.blank?
+    return {error: 'Please input video ID'} if @video_id.blank?
     items = video_items
-    raise ArgumentError.new('Invalid video ID ') if items.blank?
+    return {error: 'Video not found'} if items.blank?
     video = items[0]['snippet']
     {
       video_id: @video_id,

@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe VideoSource, type: :model do
   describe "validations" do
-    it { should validate_presence_of(:video_url) }
     it { should validate_presence_of(:provider) }
     it { should validate_presence_of(:identify_id) }
     it { should allow_value("https://www.youtube.com/watch?v=abc123").for(:video_url) }
