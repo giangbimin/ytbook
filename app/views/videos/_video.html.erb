@@ -1,16 +1,18 @@
-<div id="<%= dom_id video %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Video source:</strong>
-    <%= video.video_source_id %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= video.title %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= video.description %>
-  </p>
+<div class="flex flex-col sm:flex-row bg-white overflow-hidden shadow-xl mt-3 mb-3" id="<%= dom_id video %>">
+  <div class="basis-1/2 sm:basis-full">
+    <div class="relative h-0 overflow-hidden max-w-full w-full" style="padding-bottom: 56.25%">
+      <iframe src="https://www.youtube.com/embed/<%= video.identify_id %>" frameborder="0" allowfullscreen class="absolute top-0 left-0 w-full h-full" ></iframe>
+    </div>
+  </div>
+  <div class="basis-1/2 sm:basis-full p-8 text-center md:text-left space-y-4 bg-slate-100">
+    <div class="font-medium text-sm leading-6 text-indigo-600">
+      <%= "video.user_email" %>
+    </div>
+    <h3 class="block font-bold text-base leading-4 dark:text-white text-ellipsis overflow-hidden ">
+      <%= video.title.html_safe %>
+    </h3>
+    <div class="text-sm text-slate-600 leading-6 overflow-auto max-h-48">
+      <%= simple_format video.description.html_safe %>
+    </div>
+  </div>
 </div>
