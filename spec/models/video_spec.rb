@@ -8,5 +8,6 @@ RSpec.describe Video, type: :model do
 
   describe 'associations' do
     it { should belong_to(:video_source) }
+    it { should belong_to(:user).optional(true) }
   end
 end

@@ -9,6 +9,7 @@
       </div>
       <div class="hidden md:flex items-center space-x-1">
         <% if logged_in? %>
+          <%= link_to 'New video', share_path, class: "rounded-lg py-3 px-5 bg-green-600 text-white block font-medium" %>
           <%= button_to "Logout", logout_path, class: "rounded-lg py-3 px-5 bg-red-600 text-white inline-block font-medium cursor-pointer", method: :delete %>
         <% else %>
           <%= form_with(scope: :session, url: login_path) do |f| %>

@@ -1,4 +1,6 @@
 class GenerateVideoService
+  attr_accessor :user_id
+
   def initialize video_source
     @video_source = video_source
   end
@@ -13,7 +15,8 @@ class GenerateVideoService
       video_attrs = {
         title: video_information[:title],
         description: video_information[:description],
-        video_source_id: @video_source.id
+        video_source_id: @video_source.id,
+        user_id: user_id
       }
       Video.create!(video_attrs)
       status = true

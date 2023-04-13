@@ -6,7 +6,7 @@
   </div>
   <div class="basis-1/2 sm:basis-full p-8 text-center md:text-left space-y-4 bg-slate-100">
     <div class="font-medium text-sm leading-6 text-indigo-600">
-      <%= "video.user_email" %>
+      <%= video.user_email || "Admin" %>
     </div>
     <h3 class="block font-bold text-base leading-4 dark:text-white text-ellipsis overflow-hidden ">
       <%= video.title.html_safe %>

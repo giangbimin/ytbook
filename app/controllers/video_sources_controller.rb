@@ -11,7 +11,9 @@ class VideoSourcesController < ApplicationController
 
   def create
     @video_source = VideoSource.new(video_source_params)
-    status = GenerateVideoService.new(@video_source).execute
+    service = GenerateVideoService.new(@video_source)
+    service.user_id = current_user&.id
+    status = service.execute
     respond_to do |format|
       if status
         format.html { redirect_to videos_url, notice: "Video was successfully created." }
