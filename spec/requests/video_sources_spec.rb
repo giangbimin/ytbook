@@ -43,7 +43,6 @@ RSpec.describe "/video_sources", type: :request do
           post video_sources_url, params: { video_source: invalid_attributes }
         }.to change(VideoSource, :count).by(0)
       end
-
     
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post video_sources_url, params: { video_source: invalid_attributes }

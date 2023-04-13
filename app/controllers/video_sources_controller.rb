@@ -1,4 +1,6 @@
 class VideoSourcesController < ApplicationController
+  # before_action :authorized
+
   def new
     @video_source = VideoSource.new
   end
